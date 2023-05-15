@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:startertemplate/components/confirmation_popup.dart';
 import 'package:startertemplate/edit_task/edit_task_page.dart';
 import 'package:startertemplate/home/components/task_item.dart';
 import 'package:startertemplate/view_task/view_task_page.dart';
@@ -81,7 +82,25 @@ class _HomePageState extends State<HomePage> {
                           ),
                         );
                       },
-                      onTapDelete: () {},
+                      onTapDelete: () {
+                        debugPrint('hapus task');
+
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return ConfirmationPopup(
+                              onCancel: () {
+                                debugPrint('Cancel');
+                              },
+                              onContinue: () {
+                                debugPrint('Continue');
+                              },
+                              judul: "Konfirmasi",
+                              detail: "Yakin ingin menghapus task ini?",
+                            );
+                          },
+                        );
+                      },
                     );
                   },
                   separatorBuilder: (context, index) {
