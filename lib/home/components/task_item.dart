@@ -53,15 +53,16 @@ class _TaskItemState extends State<TaskItem> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Leading
-                GestureDetector(
-                  onTap: widget.onTapIsDone,
-                  child: widget.isDone == true
-                      ? const Icon(Icons.check_box_outline_blank)
-                      : const Icon(
-                          Icons.check_box,
-                          color: Colors.green,
-                        ),
-                ),
+                // ! Dikerjakan kalau selesai
+                // GestureDetector(
+                //   onTap: widget.onTapIsDone,
+                //   child: widget.isDone == true
+                //       ? const Icon(Icons.check_box_outline_blank)
+                //       : const Icon(
+                //           Icons.check_box,
+                //           color: Colors.green,
+                //         ),
+                // ),
 
                 const SizedBox(width: 16),
 

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:startertemplate/components/confirmation_popup.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:startertemplate/utils/confirmation_popup.dart';
 import 'package:startertemplate/edit_task/edit_task_page.dart';
 import 'package:startertemplate/home/components/task_item.dart';
 import 'package:startertemplate/view_task/view_task_page.dart';
 import '../add_task/add_task_page.dart';
+import '../utils/location_service.dart';
+import '../utils/notification_service.dart';
 import 'components/hero_tanggal_hari_ini.dart';
 import 'components/tombol_tambah_task.dart';
 
@@ -15,6 +18,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  NotificationService notificationService = NotificationService();
+  LocationService locationService = LocationService();
+
   @override
   void initState() {
     super.initState();
@@ -123,7 +129,20 @@ class _HomePageState extends State<HomePage> {
             top: screenHeight * .25,
             left: screenWidth * .75,
             child: TombolTambahTask(
-              onTap: () {
+              onTap: () async {
+                // Test lat dan long
+                // Position currentPosition =
+                //     await locationService.getCurrentLocation();
+                // double latitude = currentPosition.latitude;
+                // double longitude = currentPosition.longitude;
+
+                // debugPrint(latitude.toString());
+                // debugPrint(longitude.toString());
+
+                // Test local notifikasi
+                // notificationService.showNotification(
+                //     'Judul Notifikasi', 'Ini isi notifikasi');
+
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const AddTaskPage()),
