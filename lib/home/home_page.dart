@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:startertemplate/edit_task/edit_task_page.dart';
 import 'package:startertemplate/home/components/task_item.dart';
 import '../add_task/add_task_page.dart';
 import 'components/hero_tanggal_hari_ini.dart';
@@ -54,7 +55,19 @@ class _HomePageState extends State<HomePage> {
                       isDone: (index % 2 == 0) ? true : false,
                       onTapTask: () {},
                       onTapIsDone: () {},
-                      onTapEdit: () {},
+                      onTapEdit: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EditTaskPage(
+                              id: index.toString(),
+                              judul: "judul",
+                              detail: "detail",
+                              deadline: "2023-05-17",
+                            ),
+                          ),
+                        );
+                      },
                       onTapDelete: () {},
                     );
                   },
