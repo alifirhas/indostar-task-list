@@ -3,14 +3,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:startertemplate/edit_task/edit_task_page.dart';
 
+import '../home/home_page.dart';
+import '../utils/confirmation_popup.dart';
 import '../utils/my_color.dart';
 import 'components/view_task_navigator.dart';
+import 'view_task_logic.dart';
 
 class ViewTaskPage extends StatefulWidget {
   final String id;
   final String judul;
   final String detail;
-  final String deadline;
+  final DateTime deadline;
+  final bool isDone;
 
   const ViewTaskPage({
     super.key,
@@ -18,6 +22,7 @@ class ViewTaskPage extends StatefulWidget {
     required this.judul,
     required this.detail,
     required this.deadline,
+    required this.isDone,
   });
 
   @override
@@ -28,6 +33,9 @@ class _ViewTaskPageState extends State<ViewTaskPage> {
   // Screen
   // final double screenWidth = MediaQuery.of(context).size.width;
   // final double screenHeight = MediaQuery.of(context).size.height;
+
+  // Logic
+  final viewTaskLogic = ViewTaskLogic();
 
   // Formatter
   final DateFormat dateFormatter = DateFormat('yyyy-MM-dd');
@@ -46,7 +54,7 @@ class _ViewTaskPageState extends State<ViewTaskPage> {
 
     judulController.text = widget.judul;
     detailController.text = widget.detail;
-    deadlineController.text = widget.deadline;
+    deadlineController.text = dateFormatter.format(widget.deadline);
   }
 
   @override
@@ -61,7 +69,33 @@ class _ViewTaskPageState extends State<ViewTaskPage> {
               onTapBack: () {
                 Navigator.pop(context);
               },
-              onTapDelete: () {},
+              onTapDelete: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return ConfirmationPopup(
+                      onCancel: () {
+                        debugPrint('Cancel');
+                      },
+                      onContinue: () {
+                        debugPrint('Continue');
+                        debugPrint(widget.id);
+                        viewTaskLogic.deleteTask(widget.id);
+                      },
+                      afterContinue: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HomePage(),
+                          ),
+                        );
+                      },
+                      judul: "Konfirmasi",
+                      detail: "Yakin ingin menghapus task ini?",
+                    );
+                  },
+                );
+              },
               onTapEdit: () {
                 Navigator.push(
                   context,
@@ -70,7 +104,7 @@ class _ViewTaskPageState extends State<ViewTaskPage> {
                       id: widget.id,
                       judul: widget.judul,
                       detail: widget.detail,
-                      deadline: widget.deadline,
+                      deadline: dateFormatter.format(widget.deadline),
                     ),
                   ),
                 );

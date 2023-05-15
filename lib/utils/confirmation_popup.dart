@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class ConfirmationPopup extends StatelessWidget {
   final Function() onCancel;
   final Function() onContinue;
+  final Function()? afterContinue;
   final String judul;
   final String detail;
 
@@ -12,6 +13,7 @@ class ConfirmationPopup extends StatelessWidget {
     required this.onContinue,
     required this.judul,
     required this.detail,
+    this.afterContinue,
   });
 
   @override
@@ -32,6 +34,7 @@ class ConfirmationPopup extends StatelessWidget {
           onPressed: () {
             onContinue();
             Navigator.of(context).pop();
+            afterContinue!();
           },
         ),
       ],

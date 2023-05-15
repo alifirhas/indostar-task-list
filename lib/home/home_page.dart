@@ -103,10 +103,11 @@ class _HomePageState extends State<HomePage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => ViewTaskPage(
-                                    id: index.toString(),
-                                    judul: "judul",
-                                    detail: "detail",
-                                    deadline: "2023-05-17",
+                                    id: taskList[index].id,
+                                    judul: taskList[index].judul,
+                                    detail: taskList[index].detail,
+                                    deadline: taskList[index].deadline,
+                                    isDone: taskList[index].isDone,
                                   ),
                                 ),
                               );
@@ -126,8 +127,6 @@ class _HomePageState extends State<HomePage> {
                               );
                             },
                             onTapDelete: () {
-                              debugPrint('hapus task');
-
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
@@ -137,6 +136,10 @@ class _HomePageState extends State<HomePage> {
                                     },
                                     onContinue: () {
                                       debugPrint('Continue');
+                                      homeLogic.deleteTask(taskList[index].id);
+                                      setState(() {
+                                        taskList = homeLogic.getTaskList();
+                                      });
                                     },
                                     judul: "Konfirmasi",
                                     detail: "Yakin ingin menghapus task ini?",
