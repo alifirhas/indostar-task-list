@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:startertemplate/pages/login_page.dart';
-import 'package:startertemplate/pages/setting_page.dart';
-import '../pages/about_page.dart';
 
 /*
 
@@ -32,12 +29,12 @@ class MyDrawer extends StatelessWidget {
     // pop app
     Navigator.pop(context);
     // go back to login page
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const LoginPage(),
-      ),
-    );
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) => const LoginPage(),
+    //   ),
+    // );
   }
 
   @override
@@ -63,13 +60,13 @@ class MyDrawer extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: GestureDetector(
               onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const AboutPage(),
-                  ),
-                );
+                // Navigator.pop(context);
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => const AboutPage(),
+                //   ),
+                // );
               },
               child: ListTile(
                 leading: const Icon(Icons.info),
@@ -81,28 +78,28 @@ class MyDrawer extends StatelessWidget {
             ),
           ),
 
-          // SETTING PAGE
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SettingPage(),
-                  ),
-                );
-              },
-              child: ListTile(
-                leading: const Icon(Icons.settings),
-                title: Text(
-                  "S E T T I N G S",
-                  style: TextStyle(color: Colors.grey[700]),
-                ),
-              ),
-            ),
-          ),
+          // // SETTING PAGE
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
+          //   child: GestureDetector(
+          //     onTap: () {
+          //       Navigator.pop(context);
+          //       Navigator.push(
+          //         context,
+          //         MaterialPageRoute(
+          //           builder: (context) => const SettingPage(),
+          //         ),
+          //       );
+          //     },
+          //     child: ListTile(
+          //       leading: const Icon(Icons.settings),
+          //       title: Text(
+          //         "S E T T I N G S",
+          //         style: TextStyle(color: Colors.grey[700]),
+          //       ),
+          //     ),
+          //   ),
+          // ),
 
           // LOGOUT BUTTON
           Padding(
