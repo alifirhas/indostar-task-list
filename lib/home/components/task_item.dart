@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import '../../utils/my_color.dart';
 
 class TaskItem extends StatefulWidget {
   final String id;
   final String judul;
   final String detail;
-  final String deadline;
+  final DateTime deadline;
   final bool isDone;
   final Function()? onTapTask;
   final Function()? onTapIsDone;
@@ -31,6 +32,9 @@ class TaskItem extends StatefulWidget {
 }
 
 class _TaskItemState extends State<TaskItem> {
+  // Formatter
+  final DateFormat dateFormatter = DateFormat('MMM dd');
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -83,7 +87,7 @@ class _TaskItemState extends State<TaskItem> {
 
                     // sub title
                     Text(
-                      "${widget.deadline} - ${widget.detail}",
+                      "${dateFormatter.format(widget.deadline)} - ${widget.detail}",
                       style: GoogleFonts.inter(
                         fontSize: 14,
                       ),

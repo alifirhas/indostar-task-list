@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:startertemplate/add_task/add_task_logic.dart';
 import 'package:startertemplate/add_task/components/add_task_navigator.dart';
+import 'package:startertemplate/home/home_page.dart';
+import 'package:startertemplate/models/task_list_model.dart';
+import 'package:uuid/uuid.dart';
 
+import '../utils/location_service.dart';
 import '../utils/my_color.dart';
 
 class AddTaskPage extends StatefulWidget {
@@ -13,12 +18,14 @@ class AddTaskPage extends StatefulWidget {
 }
 
 class _AddTaskPageState extends State<AddTaskPage> {
-  // Screen
-  // final double screenWidth = MediaQuery.of(context).size.width;
-  // final double screenHeight = MediaQuery.of(context).size.height;
+  // Logic
+  final addTaskLogic = AddTaskLogic();
 
   // Formatter
   final DateFormat dateFormatter = DateFormat('yyyy-MM-dd');
+
+  // Service
+  LocationService locationService = LocationService();
 
   // Form key
   final _addTaskFormKey = GlobalKey<FormState>();
@@ -31,6 +38,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
   @override
   void initState() {
     super.initState();
+    locationService.getCurrentLocation();
   }
 
   @override
@@ -161,10 +169,38 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       children: [
                         InkWell(
                           onTap: () {
+                            final navigator = Navigator.of(context);
                             final form = _addTaskFormKey.currentState;
 
                             if (form!.validate()) {
-                              deadlineController.text = 'blue';
+                              double latitude = locationService.getLatitude();
+                              double longitude = locationService.getLongitude();
+
+                              debugPrint(latitude.toString());
+                              debugPrint(longitude.toString());
+
+                              Task task = Task(
+                                id: const Uuid().v4().toString(),
+                                judul: judulController.text,
+                                detail: detailController.text,
+                                deadline: dateFormatter
+                                    .parse(deadlineController.text),
+                                lat: latitude,
+                                long: longitude,
+                                createdAt: DateTime.now(),
+                                updatedAt: DateTime.now(),
+                                deletedAt: DateTime.now(),
+                              );
+
+                              if (addTaskLogic.tambahTask(task)) {
+                                navigator.pop();
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const HomePage(),
+                                  ),
+                                );
+                              }
                             }
                           },
                           child: Ink(

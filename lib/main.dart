@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:startertemplate/main_page.dart';
 
-void main() {
+import 'models/task_list_model.dart';
+
+late Box taskBox;
+
+Future<void> main() async {
+  // Setup hive
+  await Hive.initFlutter();
+  Hive.registerAdapter(TaskAdapter());
+  taskBox = await Hive.openBox('taskBox');
+
   // lets run our app
   runApp(const MyApp());
 }
