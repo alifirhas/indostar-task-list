@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:startertemplate/edit_task/edit_task_page.dart';
 
 import '../utils/my_color.dart';
-import 'components/edit_task_navigator.dart';
+import 'components/view_task_navigator.dart';
 
-class EditTaskPage extends StatefulWidget {
+class ViewTaskPage extends StatefulWidget {
   final String id;
   final String judul;
   final String detail;
   final String deadline;
 
-  const EditTaskPage({
+  const ViewTaskPage({
     super.key,
     required this.id,
     required this.judul,
@@ -20,10 +21,10 @@ class EditTaskPage extends StatefulWidget {
   });
 
   @override
-  State<EditTaskPage> createState() => _EditTaskPageState();
+  State<ViewTaskPage> createState() => _ViewTaskPageState();
 }
 
-class _EditTaskPageState extends State<EditTaskPage> {
+class _ViewTaskPageState extends State<ViewTaskPage> {
   // Screen
   // final double screenWidth = MediaQuery.of(context).size.width;
   // final double screenHeight = MediaQuery.of(context).size.height;
@@ -56,9 +57,23 @@ class _EditTaskPageState extends State<EditTaskPage> {
         child: Column(
           children: [
             // Navigator
-            EditTaskNavigator(
+            ViewTaskNavigator(
               onTapBack: () {
                 Navigator.pop(context);
+              },
+              onTapDelete: () {},
+              onTapEdit: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EditTaskPage(
+                      id: widget.id,
+                      judul: widget.judul,
+                      detail: widget.detail,
+                      deadline: widget.deadline,
+                    ),
+                  ),
+                );
               },
             ),
             const SizedBox(height: 24),
@@ -72,6 +87,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
                   children: [
                     // Input judul textfield
                     TextFormField(
+                      enabled: false,
                       keyboardType: TextInputType.text,
                       controller: judulController,
                       decoration: InputDecoration(
@@ -103,8 +119,9 @@ class _EditTaskPageState extends State<EditTaskPage> {
                     ),
                     const SizedBox(height: 8),
 
-                    // Input judul textfield
+                    // Input detail textfield
                     TextFormField(
+                      enabled: false,
                       keyboardType: TextInputType.text,
                       maxLines: 5,
                       controller: detailController,
@@ -137,8 +154,9 @@ class _EditTaskPageState extends State<EditTaskPage> {
                     ),
                     const SizedBox(height: 8),
 
-                    // Input judul textfield
+                    // Input date textfield
                     TextFormField(
+                      enabled: false,
                       keyboardType: TextInputType.text,
                       controller: deadlineController,
                       decoration: InputDecoration(
@@ -170,18 +188,12 @@ class _EditTaskPageState extends State<EditTaskPage> {
                     ),
                     const SizedBox(height: 8),
 
-                    // Tombol update task / button update task
+                    // Tombol selesaikan task
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         InkWell(
-                          onTap: () {
-                            final form = _addTaskFormKey.currentState;
-
-                            if (form!.validate()) {
-                              deadlineController.text = 'blue';
-                            }
-                          },
+                          onTap: () {},
                           child: Ink(
                             child: Container(
                               decoration: BoxDecoration(
@@ -190,7 +202,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
                               ),
                               padding: const EdgeInsets.all(20),
                               child: Text(
-                                'UPDATE TASK',
+                                'DONE',
                                 style: GoogleFonts.inter(
                                   color: MyColors.white,
                                   fontWeight: FontWeight.bold,
