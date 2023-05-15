@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:startertemplate/home/components/task_item.dart';
+import '../add_task/add_task_page.dart';
 import 'components/hero_tanggal_hari_ini.dart';
 import 'components/tombol_tambah_task.dart';
 
@@ -78,7 +79,10 @@ class _HomePageState extends State<HomePage> {
             left: screenWidth * .75,
             child: TombolTambahTask(
               onTap: () {
-                debugPrint('hello world');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AddTaskPage()),
+                );
               },
             ),
           ),
