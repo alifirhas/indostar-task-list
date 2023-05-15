@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:startertemplate/edit_task/edit_task_logic.dart';
+import 'package:startertemplate/home/home_page.dart';
 
 import '../utils/my_color.dart';
 import 'components/edit_task_navigator.dart';
@@ -27,6 +29,9 @@ class _EditTaskPageState extends State<EditTaskPage> {
   // Screen
   // final double screenWidth = MediaQuery.of(context).size.width;
   // final double screenHeight = MediaQuery.of(context).size.height;
+
+  // Logic
+  EditTaskLogic editTaskLogic = EditTaskLogic();
 
   // Formatter
   final DateFormat dateFormatter = DateFormat('yyyy-MM-dd');
@@ -179,7 +184,19 @@ class _EditTaskPageState extends State<EditTaskPage> {
                             final form = _addTaskFormKey.currentState;
 
                             if (form!.validate()) {
-                              deadlineController.text = 'blue';
+                              editTaskLogic.updateTugas(
+                                widget.id,
+                                judulController.text,
+                                detailController.text,
+                                dateFormatter.parse(deadlineController.text),
+                              );
+
+                              Navigator.pop(context);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const HomePage()),
+                              );
                             }
                           },
                           child: Ink(

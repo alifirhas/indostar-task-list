@@ -118,10 +118,11 @@ class _HomePageState extends State<HomePage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => EditTaskPage(
-                                    id: index.toString(),
-                                    judul: "judul",
-                                    detail: "detail",
-                                    deadline: "2023-05-17",
+                                    id: taskList[index].id,
+                                    judul: taskList[index].judul,
+                                    detail: taskList[index].detail,
+                                    deadline:
+                                        taskList[index].deadline.toString(),
                                   ),
                                 ),
                               );
