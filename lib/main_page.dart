@@ -1,20 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages/home_page.dart';
-
-/*
-
-M A I N P A G E
-
-This is the MainPage. I like to think of the MainPage as the holder of all other pages.
-So on this page, we have a bottom navigation bar which the user can tap. This will navigate
-the app screen to the any of the ones in the 'pages' folder:
-
-- Home Page
-- Shop Page
-- Profile Page
-- Setting Page
-
-*/
+import 'home/home_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
