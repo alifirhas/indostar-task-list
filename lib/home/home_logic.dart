@@ -9,6 +9,7 @@ class HomeLogic {
     List<dynamic> taskBoxList = taskBox.values.toList();
 
     taskBoxList.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+    taskBoxList.where((element) => element.isDone == false);
 
     return taskBoxList;
   }

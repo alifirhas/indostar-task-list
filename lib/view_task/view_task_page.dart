@@ -6,6 +6,7 @@ import 'package:startertemplate/edit_task/edit_task_page.dart';
 import '../home/home_page.dart';
 import '../utils/confirmation_popup.dart';
 import '../utils/my_color.dart';
+import '../utils/notification_service.dart';
 import 'components/view_task_navigator.dart';
 import 'view_task_logic.dart';
 
@@ -33,6 +34,9 @@ class _ViewTaskPageState extends State<ViewTaskPage> {
   // Screen
   // final double screenWidth = MediaQuery.of(context).size.width;
   // final double screenHeight = MediaQuery.of(context).size.height;
+
+  // Service
+  NotificationService notificationService = NotificationService();
 
   // Logic
   final viewTaskLogic = ViewTaskLogic();
@@ -227,7 +231,18 @@ class _ViewTaskPageState extends State<ViewTaskPage> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            if (viewTaskLogic.selesaikanTugas(widget.id)) {
+                              notificationService.showNotification(
+                                  'Tugas selesai', 'Tugas anda selesai');
+                              Navigator.pop(context);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const HomePage()),
+                              );
+                            }
+                          },
                           child: Ink(
                             child: Container(
                               decoration: BoxDecoration(

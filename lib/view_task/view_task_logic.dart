@@ -17,4 +17,23 @@ class ViewTaskLogic {
       return false;
     }
   }
+
+  bool selesaikanTugas(String id) {
+    try {
+      final taskBox = Hive.box('taskBox');
+      final taskObject = taskBox.get(id);
+
+      if (taskObject != null) {
+        taskObject.isDone = true;
+        Hive.box('taskBox').put(id, taskObject);
+      }
+
+      debugPrint('selesai');
+
+      return true;
+    } catch (e) {
+      inspect(e);
+      return false;
+    }
+  }
 }
