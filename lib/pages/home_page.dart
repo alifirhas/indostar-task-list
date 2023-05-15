@@ -21,16 +21,18 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-        child: ListView.builder(
-          itemCount: 10,
-          itemBuilder: (context, index) => Container(
-            height: 200,
-            margin: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
-              color: Colors.grey[200],
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: ListView.builder(
+            itemCount: 10,
+            itemBuilder: (context, index) => Container(
+              height: 200,
+              margin: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4),
+                color: Colors.grey[200],
+              ),
             ),
           ),
         ),

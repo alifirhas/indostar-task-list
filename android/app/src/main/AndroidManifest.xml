@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.startertemplate">
    <application
-        android:label="startertemplate"
+        android:label="Indostar Task List"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
